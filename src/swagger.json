@@ -1,0 +1,231 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Atlas",
+    "description": "Esta é uma documentação sobre a Atlas API.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gabriel@email.com"
+    }
+  },
+      "paths": {
+        "/users": {
+          "post": {
+            "tags": ["Users"],
+            "summary": "Cria um novo usuário",
+            "description": "Creates a new user",
+            "requestBody" : {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "name": "fulano da silva",
+                      "email": "fulano@email.com"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "admin": {
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          }
+                        }
+                
+                    }
+                  }
+                }
+              },
+              "500": { 
+                "description": "Erro: Este email já está sendo utilizado" 
+              }
+            }
+          },
+
+          "get": {
+            "tags": ["Users"],
+            "summary": "Listar todos usuarios",
+            "parameters": [
+              {
+                "in": "header",
+                "name": "user_id",
+                "required": true,
+                "description": "ID obrigatório no header para listar usuários"
+              }
+            ],
+            "description": "Listar todos usuários",
+          
+            "responses": {
+              "201": {
+                "description": "Created",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "admin": {
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+      },
+
+        "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "description": "ID obrigatório no path da url para listar usuario específico"
+          }
+        ],
+        "summary": "Listar usuario específico",
+        "description": "Listar usuario específico",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+            
+                }
+              }
+            }
+          },
+          "500": { 
+            "description": "Usuário não encontrado" 
+          }
+        }
+      }
+    },
+
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Atualiza usuário para Administrador",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "description": "ID obrigatório no path da url para listar usuários"
+          }
+        ],
+        "description": "Atualiza usuário para Administrador",
+        "responses": {
+          "201": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+            
+                }
+              }
+            }
+          },
+          "500": { 
+            "description": "Falha ao atualizar usuario" 
+          }
+        }
+      }
+    }
+  }
+}

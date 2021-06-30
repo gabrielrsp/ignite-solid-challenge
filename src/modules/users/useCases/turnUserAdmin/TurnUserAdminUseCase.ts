@@ -10,10 +10,12 @@ class TurnUserAdminUseCase {
 
   execute({ user_id }: IRequest): User {
     const userFound = this.usersRepository.findById(user_id);
+    if (userFound) {
+      const updatedUser = this.usersRepository.turnAdmin(userFound);
 
-    const updatedUser = this.usersRepository.turnAdmin(userFound);
-
-    return updatedUser;
+      return updatedUser;
+    }
+    throw new Error("Falha ao atualizar usuario");
   }
 }
 

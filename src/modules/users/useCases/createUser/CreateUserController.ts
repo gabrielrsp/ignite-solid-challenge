@@ -7,10 +7,10 @@ class CreateUserController {
 
   handle(request: Request, response: Response): Response {
     try {
-      this.createUserUseCase.execute(request.body);
-      return response.status(201).send();
+      const createdUser = this.createUserUseCase.execute(request.body);
+      return response.status(201).json(createdUser).send();
     } catch (error) {
-      throw new Error("Failed to create new user");
+      throw new Error("Erro: Este email já está sendo utilizado");
     }
   }
 }

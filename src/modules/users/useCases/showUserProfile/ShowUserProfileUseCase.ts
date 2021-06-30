@@ -14,7 +14,7 @@ class ShowUserProfileUseCase {
     if (userFound) {
       return userFound;
     }
-    throw new Error("User not found");
+    throw new Error("Usuário não encontrado");
   }
 }
 
